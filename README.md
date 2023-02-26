@@ -2,9 +2,7 @@
  Extension Builder Library with Bindings for using Apple's Core Image Filters and to do a few other things with NSImage protocols...
 
 
-<p align="center">
-![OXTAnimation](images/OXT_animated1.gif)
-</p>
+<p align="center"> ![OXTAnimation](images/OXT_animated1.gif) </p>
 
  OXT Apple Imaging Lib is a library of handlers and bindings for using some of Apple's Core Image API, Image Filtering in particular, as well as a few general use NSImage protocol capabilities. Obviously this library module will only be useful to xTalk scripts that are running on Apple platforms. I'm writing on and have only tested on macOS, and the lib may need modifications, UIImage instead of NSImage, for iOS usability. Core Image Filters have been part of macOS since OS X Tiger release (sometime around 2005).] and so it is a well tested and sturdy workhorse of an API.
 
