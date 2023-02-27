@@ -10,6 +10,7 @@ import module org.openxtalk.appleimagelib
   use com.livecode.arithmetic
   use com.livecode.logic
   use com.livecode.type
+  use com.livecode.byte
   use com.livecode.typeconvert
   foreign type CGSize
   foreign type NSRect
@@ -24,8 +25,8 @@ import module org.openxtalk.appleimagelib
   foreign handler ObjC_NSDataAlloc() returns ObjcRetainedId
   handler getNSImageNames() returns optional any
   handler getCoreImageFiltersNames() returns String
-  handler getIconForContentType(in pUTTypeIDstr as String) returns optional any
-  handler getIconForFile(in pUTTypeIDstr as String) returns optional any
+  handler getIconForContentType(in pUTTypeIDstr as String, in pImageRep as optional String) returns optional any
+  handler getIconForFile(in pFilePath as String) returns optional any
   handler setIconForFile(in pImageScriptObj as String, in pFilePath as String) returns Boolean
   handler CoreImageFilterNoParam(in pImageScriptObj as String, in pFilterNameStr as String) returns optional any
   handler CoreImageFilterParamsList(in pCIFilterName as String) returns String

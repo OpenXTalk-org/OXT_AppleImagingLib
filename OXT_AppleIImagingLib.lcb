@@ -11,6 +11,7 @@ use com.livecode.binary
 use com.livecode.bitwise
 use com.livecode.math
 use com.livecode.string
+use com.livecode.char
 
   metadata title is "OpenXtalk Apple Image Lib"
   metadata author is "Paul McClernan"
@@ -142,9 +143,10 @@ public handler getCoreImageFiltersNames() returns String
 end handler
 
 private foreign handler ObjC_UTTypeWithIdentifier( in pUTTypeIDNSStr as ObjcId) returns optional ObjcId binds to "objc:UTType.+typeWithIdentifier:"
-public handler getIconForContentType( in pUTTypeIDstr as String) returns optional any
+public handler getIconForContentType( in pUTTypeIDstr as String, in pImageRep as optional String) returns optional any
    -- https://developer.apple.com/documentation/uniformtypeidentifiers/system-declared_uniform_type_identifiers?language=objc
    -- public.midi-audio
+   variable tImgRepNum as optional Number
    variable pSharedWorkspace as ObjcObject
    variable tStatus as Boolean
    variable tNSImage as optional ObjcObject
@@ -168,23 +170,32 @@ public handler getIconForContentType( in pUTTypeIDstr as String) returns optiona
          put ObjC_NSWorkspaceIconForContentType( pSharedWorkspace, tUTType) into tNSImage
          -- put ObjC_NSWorkspaceIconForFile( pSharedWorkspace, StringToNSString(pFilePath)) into tNSImage
          if tNSImage is not nothing then
-         -- put ObjC_NSWorkspaceSelectFile(pSharedWorkspace, StringToNSString(pFilePath), StringToNSString("")) into tStatus
-         put ObjC_NSImageRepresentations(tNSImage) into tImageReps
-         put ListFromNSArray(tImageReps) into tImageRepsList
-         put the last element of tImageRepsList into tImageRep
-         LogNSObjectReflection(tImageRep)
-         --if tImageRep is not nothing then
-         put ObjC_NSImageRepGetCGImage( tImageRep, nothing, nothing, nothing) into tCGImageRef
-         -- log ["CGImage",tCGImageRef]
-         put ObjC_CIImageWithCGImage(tCGImageRef) into tCIImage
-         put ObjC_NSBitmapImageRepAlloc() into tBitmapImageRep
-         put ObjC_NSBitmapImageRepInitWithCIImage(tBitmapImageRep, tCIImage) into tBitmapImageRep
-         put ObjC_NSBitmapImageRepRepresenatationUsingType(tBitmapImageRep, 4, nothing) into tImageDataObj --- TIFF = 0 -- BMP = 1 -- GIF = 2 - JPEG = 3 -- PNG = 4 - JPEG2000 = 3
-         put DataFromNSData(tImageDataObj) into tImageData
-      else
-         put "Error: Identifier Not Found!" into tImageData
+            -- put ObjC_NSWorkspaceSelectFile(pSharedWorkspace, StringToNSString(pFilePath), StringToNSString("")) into tStatus
+            put ObjC_NSImageRepresentations(tNSImage) into tImageReps
+            put ListFromNSArray(tImageReps) into tImageRepsList
+            if pImageRep contains "large" then
+                  put the last element of tImageRepsList into tImageRep
+               else if pImageRep contains "small" then
+                  put element 1 of tImageRepsList into tImageRep
+               else if pImageRep is the empty string then
+                  put element 1 of tImageRepsList into tImageRep
+               else
+                  put pImageRep parsed as number into tImgRepNum
+                  put element tImgRepNum of tImageRepsList into tImageRep
+            end if
+            LogNSObjectReflection(tImageRep)
+            --if tImageRep is not nothing then
+            put ObjC_NSImageRepGetCGImage( tImageRep, nothing, nothing, nothing) into tCGImageRef
+            -- log ["CGImage",tCGImageRef]
+            put ObjC_CIImageWithCGImage(tCGImageRef) into tCIImage
+            put ObjC_NSBitmapImageRepAlloc() into tBitmapImageRep
+            put ObjC_NSBitmapImageRepInitWithCIImage(tBitmapImageRep, tCIImage) into tBitmapImageRep
+            put ObjC_NSBitmapImageRepRepresenatationUsingType(tBitmapImageRep, 4, nothing) into tImageDataObj --- TIFF = 0 -- BMP = 1 -- GIF = 2 - JPEG = 3 -- PNG = 4 - JPEG2000 = 3
+            put DataFromNSData(tImageDataObj) into tImageData
+         else
+            put "Error: Identifier Not Found!" into tImageData
+         end if
       end if
-   end if
    end unsafe
    return tImageData
 end handler
