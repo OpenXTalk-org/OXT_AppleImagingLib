@@ -37,7 +37,7 @@ constant kCICategoryTransition is "CICategoryTransition"
 
   -------------------- Type Declarations -------------------------------
 public foreign type CGSize binds to "MCAggregateTypeInfo:qq"
-public foreign type NSRect binds to "MCAggregateTypeInfo:qqqq"
+public foreign type CGRect binds to "MCAggregateTypeInfo:qqqq"
 public foreign type CGImageRef binds to "MCAggregateTypeInfo:r"
  -- public type CGImageRef is Pointer
 public foreign type CGPoint binds to "MCAggregateTypeInfo:qq"
@@ -98,6 +98,11 @@ private foreign handler ObjC_NSImageRepresentations(in pImage as ObjcId) returns
 private foreign handler ObjC_NSImageRepGetCGImage( in pNSImageRep as ObjcId, in pContentRect as optional ObjcId, in pContext as optional ObjcId, in pHints as optional ObjcId) returns CGImageRef binds to "objc:NSImage.-CGImageForProposedRect:context:hints:"
 -- private foreign handler ObjC_NSImageRepGetCGImage(in pImageRep as ObjcId, in pContext as optional ObjcId, in pHints as optional ObjcId) returns CGImageRef binds to "objc:NSImage.-CGImageForProposedRect:context:hints:"
 private foreign handler ObjC_CGImageForProposedRectContextHints(in pImageRep as optional ObjcId, in pContext as optional ObjcId, in pHints as optional ObjcId) returns CGImageRef binds to "objc:NSBitmapImageRep.-CGImageForProposedRect:context:hints:"
+
+-- NSStringFromRect is handy when used in conjunction with Log for printing debug messages:
+private foreign handler c_NSStringFromRect(in pCGRect as CGRect) returns ObjcId binds to "c:NSStringFromRect"
+-- c_NSRectFromString is super handy, it parses an NSstring for four numbers in order orig x, orig y, width, height:
+private foreign handler c_NSRectFromString(in pNSString as ObjcId) returns optional CGRect binds to "c:NSRectFromString"
 
 -- + (instancetype)imageRepWithData:(NSData *)data;
 -- https://developer.apple.com/documentation/appkit/nsbitmapimagerep/1395502-imagerepwithdata?language=objc
@@ -389,6 +394,71 @@ public handler CoreImageFilterParamsList( in pCIFilterName as String) returns St
    end unsafe
 end handler
 
+public handler CoreImageGenorateTextImage( in tText as String , in tFontName as String, in tFontSize as Number,in tScaleFactor as Number,in tPadding as Number) returns optional any -- ObjcObject
+    variable tCGRect as CGRect
+    variable tNSImage as optional ObjcObject
+    variable tCIImage as optional ObjcObject
+    variable tCIFilter as optional ObjcObject
+    variable tData as optional Data
+    variable tList as optional List
+    variable tImageDataObj as ObjcId
+    variable tImageData as Data
+    variable tImageReps as ObjcObject
+    variable tImageRepsList as List
+    variable tImageRep as ObjcId
+    variable tBitmapImageRep as ObjcObject
+    variable tCGImageRef as CGImageRef
+    unsafe
+    put ObjC_CIFiltersFilterWithName( StringToNSString ( "CITextImageGenerator" ) ) into tCIFilter
+
+      ObjC_CIFilterSetValueForKey(tCIFilter, StringToNSString(tText), StringToNSString("inputText"))
+      ObjC_CIFilterSetValueForKey(tCIFilter, StringToNSString(tFontName), StringToNSString("inputFontName"))
+      ObjC_CIFilterSetValueForKey(tCIFilter, NumberToNSNumber(tFontSize), StringToNSString("inputFontSize"))
+      ObjC_CIFilterSetValueForKey(tCIFilter, NumberToNSNumber(tScaleFactor), StringToNSString("inputScaleFactor"))
+      ObjC_CIFilterSetValueForKey(tCIFilter, NumberToNSNumber(tPadding), StringToNSString("inputPadding"))
+      LogNSObjectReflection(tCIFilter)
+      put ObjC_CIFilterOutputImage(tCIFilter) into tCIImage
+      LogNSObjectReflection(tCIImage)
+      put c_NSRectFromString( StringToNSString("0,0,128,128") ) into tCGRect
+      log tCGRect
+      put ObjC_NSBitmapImageRepAlloc() into tBitmapImageRep
+      put ObjC_NSBitmapImageRepInitWithCIImage(tBitmapImageRep, tCIImage) into tBitmapImageRep
+      put ObjC_NSBitmapImageRepRepresenatationUsingType(tBitmapImageRep, 4, nothing) into tImageDataObj --- TIFF = 0 -- BMP = 1 -- GIF = 2 - JPEG = 3 -- PNG = 4 - JPEG2000 = 3
+      put DataFromNSData(tImageDataObj) into tImageData
+      return tImageData
+   end unsafe
+end handler
+
+public handler CoreImageGenoratorWithParam(  in pGenFilterNameStr as String, in pParamNameStr as String, in pParam1Val as optional Number) returns optional any -- ObjcObject
+    variable tNSImage as optional ObjcObject
+    variable tCIImage as optional ObjcObject
+    variable tCIFilter as optional ObjcObject
+    variable tData as optional Data
+    variable tList as optional List
+    variable tImageDataObj as ObjcId
+    variable tImageData as Data
+    variable tImageReps as ObjcObject
+    variable tImageRepsList as List
+    variable tImageRep as ObjcId
+    variable tBitmapImageRep as ObjcObject
+    variable tCGImageRef as CGImageRef
+    unsafe
+
+      put ObjC_CIFiltersFilterWithName( StringToNSString ( pGenFilterNameStr ) ) into tCIFilter
+
+      ObjC_CIFilterSetValueForKey(tCIFilter, NumberToNSNumber(pParam1Val), StringToNSString(pParamNameStr))
+      -- LogNSObjectReflection(tCIFilter)
+      put ObjC_CIFilterOutputImage(tCIFilter) into tCIImage
+      --  LogNSObjectReflection(tCIImage)
+      put ObjC_NSBitmapImageRepAlloc() into tBitmapImageRep
+      put ObjC_NSBitmapImageRepInitWithCIImage(tBitmapImageRep, tCIImage) into tBitmapImageRep
+      put ObjC_NSBitmapImageRepRepresenatationUsingType(tBitmapImageRep, 4, nothing) into tImageDataObj --- TIFF = 0 -- BMP = 1 -- GIF = 2 - JPEG = 3 -- PNG = 4 - JPEG2000 = 3
+      put DataFromNSData(tImageDataObj) into tImageData
+      return tImageData
+   end unsafe
+end handler
+
+
 public handler CoreImageFilterWithParam( in pImageScriptObj as String, in pFilterNameStr as String, in pParamNameStr as String, in pParam1Val as optional Number) returns optional any -- ObjcObject
     variable tNSImage as optional ObjcObject
     variable tCIImage as optional ObjcObject
@@ -588,6 +658,20 @@ public handler CoreImageFilterWithParamsList( in pImageScriptObj as String, in p
              end if
              parse element 2 of tParamAndValue as number into tValue
           end if
+          if tKey is "inputWidth" or tKey is "width" then
+             if tKey is "width" then
+               put "inputWidth" into tKey
+             end if
+             parse element 2 of tParamAndValue as number into tValue
+          end if
+          if tKey is "inputCenter" or tKey is "center" then
+            if tKey is "center" then
+               put "inputCenter" into tKey
+               log tKey
+            end if
+            -- parse element 2 of tParamAndValue as number into tValue
+          end if
+
           --- need to add to this params parsing loop
 
           -- log ["Params and value", tKey, tValue]
