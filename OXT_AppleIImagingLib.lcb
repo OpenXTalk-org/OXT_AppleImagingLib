@@ -394,7 +394,7 @@ public handler CoreImageFilterParamsList( in pCIFilterName as String) returns St
    end unsafe
 end handler
 
-public handler CoreImageGenorateTextImage( in tText as String , in tFontName as String, in tFontSize as Number,in tScaleFactor as Number,in tPadding as Number) returns optional any -- ObjcObject
+public handler CoreImageGenerateTextImage( in tText as String , in tFontName as String, in tFontSize as Number,in tScaleFactor as Number,in tPadding as Number) returns optional any -- ObjcObject
     variable tCGRect as CGRect
     variable tNSImage as optional ObjcObject
     variable tCIImage as optional ObjcObject

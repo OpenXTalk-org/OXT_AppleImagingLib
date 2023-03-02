@@ -30,7 +30,7 @@ import module org.openxtalk.appleimagelib
   handler setIconForFile(in pImageScriptObj as String, in pFilePath as String) returns Boolean
   handler CoreImageFilterNoParam(in pImageScriptObj as String, in pFilterNameStr as String) returns optional any
   handler CoreImageFilterParamsList(in pCIFilterName as String) returns String
-  handler CoreImageGenorateTextImage(in tText as String, in tFontName as String, in tFontSize as Number, in tScaleFactor as Number, in tPadding as Number) returns optional any
+  handler CoreImageGenerateTextImage(in tText as String, in tFontName as String, in tFontSize as Number, in tScaleFactor as Number, in tPadding as Number) returns optional any
   handler CoreImageGenoratorWithParam(in pGenFilterNameStr as String, in pParamNameStr as String, in pParam1Val as optional Number) returns optional any
   handler CoreImageFilterWithParam(in pImageScriptObj as String, in pFilterNameStr as String, in pParamNameStr as String, in pParam1Val as optional Number) returns optional any
   handler CoreImageFilterWithParamsList(in pImageScriptObj as String, in pFilterNameStr as String) returns optional any

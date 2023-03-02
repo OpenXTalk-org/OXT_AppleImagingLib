@@ -32,7 +32,7 @@
   <handler name="setIconForFile" parameters="in string,in string" return="boolean"/>
   <handler name="CoreImageFilterNoParam" parameters="in string,in string" return="optional any"/>
   <handler name="CoreImageFilterParamsList" parameters="in string" return="string"/>
-  <handler name="CoreImageGenorateTextImage" parameters="in string,in string,in number,in number,in number" return="optional any"/>
+  <handler name="CoreImageGenerateTextImage" parameters="in string,in string,in number,in number,in number" return="optional any"/>
   <handler name="CoreImageGenoratorWithParam" parameters="in string,in string,in optional number" return="optional any"/>
   <handler name="CoreImageFilterWithParam" parameters="in string,in string,in string,in optional number" return="optional any"/>
   <handler name="CoreImageFilterWithParamsList" parameters="in string,in string" return="optional any"/>
