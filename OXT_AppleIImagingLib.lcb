@@ -37,7 +37,10 @@ constant kCICategoryTransition is "CICategoryTransition"
 
   -------------------- Type Declarations -------------------------------
 public foreign type CGSize binds to "MCAggregateTypeInfo:qq"
+public foreign type NSSize binds to "MCAggregateTypeInfo:qq"
 public foreign type CGRect binds to "MCAggregateTypeInfo:qqqq"
+public foreign type NSRect binds to "MCAggregateTypeInfo:qqqq"
+
 public foreign type CGImageRef binds to "MCAggregateTypeInfo:r"
  -- public type CGImageRef is Pointer
 public foreign type CGPoint binds to "MCAggregateTypeInfo:qq"
@@ -73,6 +76,14 @@ private foreign handler ObjC_CIFiltersFilterWithName(in pCIFilterNSStr as ObjcId
 private foreign handler ObjC_NSImageAlloc() returns ObjcRetainedId binds to "objc:NSImage.+alloc"
 private foreign handler ObjC_NSImageInit(in pObj as ObjcRetainedId) returns ObjcId binds to "objc:NSImage.-init"
 
+private foreign handler c_NSSizeFromString(in pNSString as ObjcId) returns optional NSSize binds to "c:NSSizeFromString"
+
+private foreign handler ObjC_NSImageSetSize(in pObj as ObjcId, in pNSSize as NSSize) returns nothing binds to "objc:NSImage.-setSize:"
+private foreign handler ObjC_NSImageSetScale(in pObj as ObjcId, in pScale as CUInt) returns nothing binds to "objc:NSImage.-imageScale"
+
+private foreign handler ObjC_NSImageGetSize(in pObj as ObjcId, in pNSSize as NSSize) returns NSSize binds to "objc:NSImage.size"
+
+
 private foreign handler ObjC_NSImageNamed( in pNameNSString as optional ObjcId) returns ObjcRetainedId binds to "objc:NSImage.+imageNamed:"
 -- private foreign handler ObjC_NSImageGetSysSymbolNamed(in pNameNSString as ObjcId, in pAccessibilityDescr as optional ObjcId) returns ObjcId binds to "objc:NSImage.+systemSymbolName:"
 -- private foreign handler ObjC_NSImageSystemImageNamed( in pNameNSString as ObjcId) returns optional ObjcRetainedId binds to "objc:NSImage.-systemImageNamed:"
@@ -80,13 +91,14 @@ private foreign handler ObjC_NSImageNamed( in pNameNSString as optional ObjcId) 
 -- + (instancetype)imageWithSymbolName:(NSString *)name variableValue:(double)value;
 
 private foreign handler ObjC_NSImageWithSystemSymbolNameAndDescription( in pNameNSString as optional ObjcId, in pCaptionNSString as optional ObjcId) returns optional ObjcId binds to "objc:NSImage.+imageWithSystemSymbolName:accessibilityDescription:"
+private foreign handler ObjC_NSImageWithSymbolConfiguration( in pNameNSString as optional ObjcId, in pNSImageSymbolConfig as optional ObjcId) returns optional ObjcId binds to "objc:NSImage.-imageWithSymbolConfiguration:"
+private foreign handler ObjC_NSImageSymbolConfigWithScale( in pScale as CUInt) returns optional ObjcId binds to "objc:NSImageSymbolConfiguration.+configurationWithScale:"
+
 --macOS 11.0+
 
 private foreign handler ObjC_NSImageNamesList( in pNameNSString as optional ObjcId) returns ObjcId binds to "objc:NSImage.-names:"
 
 private foreign handler ObjC_NSImageSetValueForKey(in pObj as ObjcRetainedId, in pValue as ObjcId, in pSelector as ObjcId) returns ObjcId binds to "objc:NSImage.-setValue:forKey:"
-
-
 
 private foreign handler ObjC_NSImageInitWithContentsOfFile(in pObj as ObjcId, in pFilename as ObjcId) returns ObjcId binds to "objc:NSImage.-initWithContentsOfFile:"
 private foreign handler ObjC_NSImageInitWithData(in pObj as ObjcRetainedId, in pData as ObjcId) returns optional ObjcRetainedId binds to "objc:NSImage.-initWithData:"
@@ -99,15 +111,25 @@ private foreign handler ObjC_NSBitmapImageRepInitWithCIImage(in pNSBitmapImgRep 
 private foreign handler ObjC_NSBitmapImageRepRepresenatationUsingType(in pBitmapImageRep as ObjcId, in pType as CInt, in pProps as optional ObjcId) returns ObjcId binds to "objc:NSBitmapImageRep.-representationUsingType:properties:"
 private foreign handler ObjC_NSBitmapImageRepWithData(in pData as ObjcId) returns optional ObjcRetainedId binds to "objc:NSBitmapImageRep.+imageRepWithData:"
 
+private foreign handler ObjC_NSImageRepAlloc() returns ObjcRetainedId binds to "objc:NSImageRep.+alloc"
+private foreign handler ObjC_NSImageRepInit(in pNSImageRep as ObjcRetainedId ) returns ObjcId binds to "objc:NSImageRep.-init"
+private foreign handler ObjC_NSImageRepSetSize(in pNSImageRep as ObjcId, in pNSSize as NSSize) returns nothing binds to "objc:NSImageRep.-setSize:"
+private foreign handler ObjC_NSImageRepSetHeight(in pNSImageRep as ObjcId, in pNSSize as CUInt) returns nothing binds to "objc:NSImageRep.-setPixelsHigh:"
+private foreign handler ObjC_NSImageRepSetWidth(in pNSImageRep as ObjcId, in pNSSize as CUInt) returns nothing binds to "objc:NSImageRep.-setPixelsWide:"
+private foreign handler ObjC_NSImageRepDraw(in pNSImageRep as ObjcId) returns CBool binds to "objc:NSImageRep.-draw"
+
 private foreign handler ObjC_NSImageRepresentations(in pImage as ObjcId) returns ObjcId binds to "objc:NSImage.-representations"
-private foreign handler ObjC_NSImageRepGetCGImage( in pNSImageRep as ObjcId, in pContentRect as optional ObjcId, in pContext as optional ObjcId, in pHints as optional ObjcId) returns CGImageRef binds to "objc:NSImage.-CGImageForProposedRect:context:hints:"
+private foreign handler ObjC_NSImageAddRepresentation(in pImage as ObjcId, in pNSImageRep as ObjcId) returns nothing binds to "objc:NSImage.-addRepresentation:"
+
+private foreign handler ObjC_NSImageRepGetCGImage( in pNSImageRep as ObjcId, in pContentRect as optional NSRect, in pContext as optional ObjcId, in pHints as optional ObjcId) returns CGImageRef binds to "objc:NSImage.-CGImageForProposedRect:context:hints:"
 -- private foreign handler ObjC_NSImageRepGetCGImage(in pImageRep as ObjcId, in pContext as optional ObjcId, in pHints as optional ObjcId) returns CGImageRef binds to "objc:NSImage.-CGImageForProposedRect:context:hints:"
 private foreign handler ObjC_CGImageForProposedRectContextHints(in pImageRep as optional ObjcId, in pContext as optional ObjcId, in pHints as optional ObjcId) returns CGImageRef binds to "objc:NSBitmapImageRep.-CGImageForProposedRect:context:hints:"
 
 -- NSStringFromRect is handy when used in conjunction with Log for printing debug messages:
 private foreign handler c_NSStringFromRect(in pCGRect as CGRect) returns ObjcId binds to "c:NSStringFromRect"
 -- c_NSRectFromString is super handy, it parses an NSstring for four numbers in order orig x, orig y, width, height:
-private foreign handler c_NSRectFromString(in pNSString as ObjcId) returns optional CGRect binds to "c:NSRectFromString"
+-- private foreign handler c_NSRectFromString(in pNSString as ObjcId) returns optional CGRect binds to "c:NSRectFromString"
+private foreign handler c_NSRectFromString(in pNSString as ObjcId) returns optional NSRect binds to "c:NSRectFromString"
 
 -- + (instancetype)imageRepWithData:(NSData *)data;
 -- https://developer.apple.com/documentation/appkit/nsbitmapimagerep/1395502-imagerepwithdata?language=objc
@@ -400,7 +422,7 @@ public handler CoreImageFilterParamsList( in pCIFilterName as String) returns St
 end handler
 
 public handler CoreImageGenerateTextImage( in tText as String , in tFontName as String, in tFontSize as Number,in tScaleFactor as Number,in tPadding as Number) returns optional any -- ObjcObject
-    variable tCGRect as CGRect
+    variable tCGRect as NSRect
     variable tNSImage as optional ObjcObject
     variable tCIImage as optional ObjcObject
     variable tCIFilter as optional ObjcObject
@@ -424,8 +446,8 @@ public handler CoreImageGenerateTextImage( in tText as String , in tFontName as 
       LogNSObjectReflection(tCIFilter)
       put ObjC_CIFilterOutputImage(tCIFilter) into tCIImage
       LogNSObjectReflection(tCIImage)
-      put c_NSRectFromString( StringToNSString("0,0,128,128") ) into tCGRect
-      log tCGRect
+      -- put c_NSRectFromString( StringToNSString("0,0,128,128") ) into tCGRect
+      -- log tCGRect
       put ObjC_NSBitmapImageRepAlloc() into tBitmapImageRep
       put ObjC_NSBitmapImageRepInitWithCIImage(tBitmapImageRep, tCIImage) into tBitmapImageRep
       put ObjC_NSBitmapImageRepRepresenatationUsingType(tBitmapImageRep, 4, nothing) into tImageDataObj --- TIFF = 0 -- BMP = 1 -- GIF = 2 - JPEG = 3 -- PNG = 4 - JPEG2000 = 3
@@ -752,8 +774,6 @@ public handler ImageScriptObjToImageFormat( in pImageScriptObj as String, in pRe
           put ObjC_NSImageAlloc() into tImage
           put ObjC_NSImageInitWithContentsOfFile(tImage, StringToNSString(tFile)) into tImage
       end if
-      -- put ObjC_NSImageWithSystemSymbolNameAccessibilityDescription(StringToNSString( pImageNameStr ),StringToNSString( pImageNameStr )) into tNSImage
-         --  LogNSObjectReflection(tImage)
          -- put ObjC_NSImageInitWithName(tNSImage,StringToNSString(pImageNameStr)) into tNSImage
          -- log ["NSImage Obj",tNSImage]
    if pReturnFormat is  "TIFF" or  pReturnFormat is  "tif" then
@@ -861,14 +881,10 @@ public handler GetNSImageNamed(in pImageNameStr as String, in pReturnFormat as S
       put StringToNSString(pImageNameStr) into tNSStrObj
       -- put StringToNSString("NSApplicationIcon") into tNSStrObj
       -- put StringToNSString("NSComputer") into tNSStrObj
-      -- put PointerFromObjcObject(tNSStrObj) into tStrPtr
       put ObjC_NSImageNamed( tNSStrObj ) into tNSImage -- OOOD!
       -- put ObjC_NSImageNamed( StringToNSString("NSApplicationIcon") ) into tNSImage -- OOOD!
-
-   -- put ObjC_NSImageWithSystemSymbolNameAccessibilityDescription(StringToNSString( pImageNameStr ),StringToNSString( pImageNameStr )) into tNSImage
       --  LogNSObjectReflection(tNSImage)
-      -- put ObjC_NSImageInitWithName(tNSImage,StringToNSString(pImageNameStr)) into tNSImage
-      -- log ["NSImage Obj",tNSImage]
+            -- put ObjC_NSImageInitWithName(tNSImage,StringToNSString(pImageNameStr)) into tNSImage
       if pReturnFormat is  "TIFF" or  pReturnFormat is  "tif" then
             put ObjC_NSImageTIFFRepresentation(tNSImage) into tImageDataObj
 
@@ -906,7 +922,10 @@ public handler GetNSImageNamed(in pImageNameStr as String, in pReturnFormat as S
 end handler
 
 
-public handler GetNSImageSystemSymbolNamed(in pImageNameStr as String, in pReturnFormat as String) returns optional any
+
+-- https://developer.apple.com/documentation/appkit/1473773-nsdrawbitmap?language=objc
+
+public handler GetNSImageSystemSymbolNamed(in pImageNameStr as String, in pSizeAsString as String, in pReturnFormat as String) returns optional any
    -- (https://developer.apple.com/documentation/appkit/nsimage/3622472-init),
    -- NSImage(systemSymbolName: "pencil", accessibilityDescription: nil)
    -- NOTE: this method is only available in macOS 11.0 (Big Sur) and above so need to add OS version check here.
@@ -915,6 +934,9 @@ public handler GetNSImageSystemSymbolNamed(in pImageNameStr as String, in pRetur
    variable tNSObj as optional ObjcObject
    variable tNSStrObj as optional ObjcId
    variable tClass as optional ObjcObject
+   variable tNSSize as NSSize
+   variable tNSRect as NSRect
+
    variable tData as optional Data
 
    variable tStr as optional String
@@ -923,6 +945,7 @@ public handler GetNSImageSystemSymbolNamed(in pImageNameStr as String, in pRetur
    variable tList as optional List
    variable tUint32 as optional CUint
    variable tNum as optional Number
+   variable tSuccess as Boolean
 
    variable tImageDataObj as ObjcId
    variable tImageData as Data
@@ -930,24 +953,46 @@ public handler GetNSImageSystemSymbolNamed(in pImageNameStr as String, in pRetur
    variable tImageRepsList as List
    variable tImageRep as ObjcId
    variable tBitmapImageRep as ObjcObject
+   variable tSymbolConfig as ObjcObject
+
    variable tCGImageRef as CGImageRef
 
    unsafe
+
+   --https://developer.apple.com/documentation/appkit/nsimageresizingmode?language=objc
      ----------------------------------------------------------------------------------
-     put objC_NSApplicationSharedApplication() into tNSObj -- force AppKit to load, may not be needed?
+      put objC_NSApplicationSharedApplication() into tNSObj -- force AppKit to load symbols, may not be needed?
      -- put c_CGCaptureAllDisplays() into tNSObj -- returns a result code. To interpret the result code, see CGError. -- this is powerful juju
       --put ObjC_NSImageAlloc() into tNSImage
       -- put ObjC_NSImageInit(tNSImage) into tNSImage
       -- put ObjC_NSImageNamed(tNSImage,StringToNSString(pImageNameStr)) into tNSImage
+      put c_NSSizeFromString(StringToNSString(pSizeAsString)) into tNSSize
+      log tNSSize
       log [pImageNameStr]
       put StringToNSString(pImageNameStr) into tNSStrObj
       -- put StringToNSString("NSApplicationIcon") into tNSStrObj
       -- put StringToNSString("NSComputer") into tNSStrObj
       -- put PointerFromObjcObject(tNSStrObj) into tStrPtr
       -- put ObjC_NSImageNamed( tNSStrObj ) into tNSImage -- OOOD!
-      put ObjC_NSImageWithSystemSymbolNameAndDescription(tNSStrObj, nothing) into tNSImage
 
-      log ["NSImage Obj",tNSImage]
+      -- put ObjC_NSImageSymbolConfigWithScale( 3 ) into tSymbolConfig
+      -- put ObjC_NSImageWithSymbolConfiguration( tSymbolConfig, tSymbolConfig) into tNSImage
+
+      put ObjC_NSImageWithSystemSymbolNameAndDescription(tNSStrObj, tNSStrObj) into tNSImage -- 2nd param accessibilityDescription will be same as Symbol name, could pass 'nothing' here instead
+
+      -- log ["NSImage Obj",tNSImage]
+      -- ObjC_NSImageSetScale(tNSImage, 3 )
+       ObjC_NSImageSetSize(tNSImage, tNSSize )
+
+     -- put ObjC_NSImageRepAlloc() into tImageRep
+      -- put ObjC_NSImageRepInit( tImageRep ) into tImageRep
+      -- ObjC_NSImageRepSetSize(tImageRep, tNSSize)
+      -- ObjC_NSImageRepSetHeight(tImageRep, element 1 of tNSSize)
+      -- ObjC_NSImageRepSetWidth(tImageRep, element 2 of tNSSize)
+      -- put ObjC_NSImageRepDraw(tImageRep) into tSuccess
+      -- log ["Rendered", tSuccess]
+      -- ObjC_NSImageAddRepresentation(tNSImage, tImageRep)
+      LogNSObjectReflection(tNSImage)
       -- return ""
       if tNSImage is not nothing then
       -- NSImage(systemSymbolName: "pencil", accessibilityDescription: nil)
@@ -956,17 +1001,25 @@ public handler GetNSImageSystemSymbolNamed(in pImageNameStr as String, in pRetur
       -- put ObjC_NSImageInitWithName(tNSImage,StringToNSString(pImageNameStr)) into tNSImage
          if pReturnFormat is  "TIFF" or  pReturnFormat is  "tif" then
                put ObjC_NSImageTIFFRepresentation(tNSImage) into tImageDataObj
-
                put DataFromNSData(tImageDataObj) into tImageData
                log tImageData
                return tImageData
          else
             put ObjC_NSImageRepresentations(tNSImage) into tImageReps
             put ListFromNSArray(tImageReps) into tImageRepsList
-            put the first element of tImageRepsList into tImageRep
-             LogNSObjectReflection(tImageRep)
+            put the last element of tImageRepsList into tImageRep
+
+            -- ObjC_NSImageRepSetSize(tImageRep, tNSSize)
+            ObjC_NSImageRepSetHeight(tImageRep, element 1 of tNSSize)
+            ObjC_NSImageRepSetWidth(tImageRep, element 2 of tNSSize)
+            put ObjC_NSImageRepDraw(tImageRep) into tSuccess
+            log ["Rendered", tSuccess]
+
+            -- LogNSObjectReflection(tImageRep)
             --if tImageRep is not nothing then
-            put ObjC_NSImageRepGetCGImage( tImageRep, nothing, nothing, nothing) into tCGImageRef
+            put c_NSRectFromString( StringToNSString("0,0,128,128") ) into tNSRect
+            --  ObjC_NSImageRepGetCGImage(  pNSImageRep , pContentRect,  pContext, pHints )
+            put ObjC_NSImageRepGetCGImage( tImageRep, tNSRect, nothing, nothing) into tCGImageRef
             log ["CGImage",tCGImageRef]
             put ObjC_NSBitmapImageRepAlloc() into tBitmapImageRep
             put ObjC_NSBitmapImageRepInitWithCGImage(tBitmapImageRep, tCGImageRef) into tBitmapImageRep
