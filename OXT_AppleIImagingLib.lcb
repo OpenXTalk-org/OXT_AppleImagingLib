@@ -79,7 +79,7 @@ private foreign handler ObjC_NSImageNamed( in pNameNSString as optional ObjcId) 
 -- imageWithSymbolName:variableValue: -- macOS 13.0+
 -- + (instancetype)imageWithSymbolName:(NSString *)name variableValue:(double)value;
 
-private foreign handler ObjC_NSImageWithSystemSymbolNameAndDescription( in pNameNSString as ObjcId, in pCaptionNSString as optional ObjcId) returns optional ObjcRetainedId binds to "objc:NSImage.+imageWithSystemSymbolName:accessibilityDescription:"
+private foreign handler ObjC_NSImageWithSystemSymbolNameAndDescription( in pNameNSString as optional ObjcId, in pCaptionNSString as optional ObjcId) returns optional ObjcId binds to "objc:NSImage.+imageWithSystemSymbolName:accessibilityDescription:"
 --macOS 11.0+
 
 private foreign handler ObjC_NSImageNamesList( in pNameNSString as optional ObjcId) returns ObjcId binds to "objc:NSImage.-names:"
@@ -906,7 +906,7 @@ public handler GetNSImageNamed(in pImageNameStr as String, in pReturnFormat as S
 end handler
 
 
-public handler GetNSImageSystemSymbolNamed(in pImageNameStr as String, in pReturnFormat as String) returns optional Data
+public handler GetNSImageSystemSymbolNamed(in pImageNameStr as String, in pReturnFormat as String) returns optional any
    -- (https://developer.apple.com/documentation/appkit/nsimage/3622472-init),
    -- NSImage(systemSymbolName: "pencil", accessibilityDescription: nil)
    -- NOTE: this method is only available in macOS 11.0 (Big Sur) and above so need to add OS version check here.
@@ -946,12 +946,14 @@ public handler GetNSImageSystemSymbolNamed(in pImageNameStr as String, in pRetur
       -- put PointerFromObjcObject(tNSStrObj) into tStrPtr
       -- put ObjC_NSImageNamed( tNSStrObj ) into tNSImage -- OOOD!
       put ObjC_NSImageWithSystemSymbolNameAndDescription(tNSStrObj, nothing) into tNSImage
+
+      log ["NSImage Obj",tNSImage]
+      -- return ""
       if tNSImage is not nothing then
       -- NSImage(systemSymbolName: "pencil", accessibilityDescription: nil)
    -- put ObjC_NSImageWithSystemSymbolNameAccessibilityDescription(StringToNSString( pImageNameStr ),StringToNSString( pImageNameStr )) into tNSImage
       --  LogNSObjectReflection(tNSImage)
       -- put ObjC_NSImageInitWithName(tNSImage,StringToNSString(pImageNameStr)) into tNSImage
-      -- log ["NSImage Obj",tNSImage]
          if pReturnFormat is  "TIFF" or  pReturnFormat is  "tif" then
                put ObjC_NSImageTIFFRepresentation(tNSImage) into tImageDataObj
 
@@ -961,7 +963,7 @@ public handler GetNSImageSystemSymbolNamed(in pImageNameStr as String, in pRetur
          else
             put ObjC_NSImageRepresentations(tNSImage) into tImageReps
             put ListFromNSArray(tImageReps) into tImageRepsList
-            put the last element of tImageRepsList into tImageRep
+            put the first element of tImageRepsList into tImageRep
              LogNSObjectReflection(tImageRep)
             --if tImageRep is not nothing then
             put ObjC_NSImageRepGetCGImage( tImageRep, nothing, nothing, nothing) into tCGImageRef
