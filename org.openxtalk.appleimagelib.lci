@@ -37,8 +37,9 @@ import module org.openxtalk.appleimagelib
   handler ImageScriptObjToImageFormat(in pImageScriptObj as String, in pReturnFormat as optional String) returns Data
   handler logMainDisplayInfo() returns optional any
   handler GetNSImageNamed(in pImageNameStr as String, in pReturnFormat as String) returns optional Data
+  handler GetNSImageSystemSymbolNamed(in pImageNameStr as String, in pReturnFormat as String) returns optional Data
   handler CoreImageMotionBlurImage(in pImageScriptObj as String, in pNumValue as optional Number, in pAngle as optional Number) returns optional any
-  foreign handler objC_NSObjectsGetClassDescriptionForClass(in pNameNSString as ObjcId) returns optional ObjcRetainedId
+  foreign handler objC_NSObjectsGetClassDescriptionForClass(in pData as ObjcId) returns optional ObjcRetainedId
   foreign type ClassPropertiesList
   handler GetNSObjectClassName(in tNSObj as optional ObjcId) returns optional String
   handler LogNSObjectReflection(in pNSObj as ObjcId) returns optional any
