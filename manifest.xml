@@ -39,7 +39,7 @@
   <handler name="ImageScriptObjToImageFormat" parameters="in string,in optional string" return="data"/>
   <handler name="logMainDisplayInfo" parameters="" return="any"/>
   <handler name="GetNSImageNamed" parameters="in string,in string" return="optional data"/>
-  <handler name="GetNSImageSystemSymbolNamed" parameters="in string,in string,in string" return="optional any"/>
+  <handler name="GetNSImageSystemSymbolNamed" parameters="in string,in string" return="optional any"/>
   <handler name="CoreImageMotionBlurImage" parameters="in string,in optional number,in optional number" return="optional any"/>
   <handler name="objC_NSObjectsGetClassDescriptionForClass" parameters="in ObjcId" return="optional ObjcRetainedId"/>
   <handler name="GetNSObjectClassName" parameters="in optional ObjcId" return="optional string"/>
