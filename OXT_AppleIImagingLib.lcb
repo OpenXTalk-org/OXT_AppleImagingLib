@@ -442,7 +442,7 @@ public handler CoreImageGenerateTextImage( in tText as String , in tFontName as 
       ObjC_CIFilterSetValueForKey(tCIFilter, StringToNSString(tFontName), StringToNSString("inputFontName"))
       ObjC_CIFilterSetValueForKey(tCIFilter, NumberToNSNumber(tFontSize), StringToNSString("inputFontSize"))
       ObjC_CIFilterSetValueForKey(tCIFilter, NumberToNSNumber(tScaleFactor), StringToNSString("inputScaleFactor"))
-      log [the platform]
+      -- log [the platform]
       -- ObjC_CIFilterSetValueForKey(tCIFilter, NumberToNSNumber(tPadding), StringToNSString("inputPadding"))
       LogNSObjectReflection(tCIFilter)
       put ObjC_CIFilterOutputImage(tCIFilter) into tCIImage
