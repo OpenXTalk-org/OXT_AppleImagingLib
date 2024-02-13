@@ -5,7 +5,6 @@ use com.livecode.foreign
 use com.livecode.objc
 use com.livecode.array
 use com.livecode.list
-use com.livecode.sort
 use com.livecode.byte
 use com.livecode.date
 use com.livecode.binary
@@ -19,8 +18,6 @@ use com.livecode.char
   metadata version is "0.0.2"
 
 constant kNSImageNames is "NSActionTemplate,NSAddBookmarkTemplate,NSAddTemplate,NSAdvanced,NSAppleMenuImage,NSApplicationIcon,NSArrowCursor,NSAudioOutputMuteTemplate,NSAudioOutputVolumeHighTemplate,NSAudioOutputVolumeLowTemplate,NSAudioOutputVolumeMedTemplate,NSAudioOutputVolumeOffTemplate,NSBluetoothTemplate,NSBonjour,NSBookmarksTemplate,NSBrowserCellBranch,NSBrowserCellBranchH,NSCaution,NSChildContainerEmptyTemplate,NSChildContainerTemplate,NSClosedHandCursor,NSCMYKButton,NSColorPanel,NSColorPickerCrayon,NSColorPickerList,NSColorPickerSliders,NSColorPickerUser,NSColorPickerWheel,NSColorSwatchResizeDimple,NSColumnViewTemplate,NSComputer,NSCopyDragCursor,NSCrosshairCursor,NSDatePickerCalendarArrowLeft,NSDatePickerCalendarArrowRight,NSDatePickerCalendarHome,NSDatePickerClockCenter,NSDatePickerClockFace,NSDocEditing,NSDocSaved,NSDropDownIndicatorTemplate,NSEnterFullScreenTemplate,NSEveryone,NSExitFullScreenTemplate,NSFastForwardTemplate,NSFlowViewTemplate,NSFolder,NSFolderBurnable,NSFolderSmart,NSFollowLinkFreestandingTemplate,NSFontPanel,NSFontPanelActionButton,NSFontPanelActionButtonPressed,NSFontPanelBlurEffect,NSFontPanelDropEffectPressed,NSFontPanelEffectsDivider,NSFontPanelMinusIdle,NSFontPanelMinusPressed,NSFontPanelOpacityEffect,NSFontPanelPaperColour,NSFontPanelPaperColourPressed,NSFontPanelPlusIdle,NSFontPanelPlusPressed,NSFontPanelSliderThumb,NSFontPanelSliderThumbPressed,NSFontPanelSliderTrack,NSFontPanelSplitterKnob,NSFontPanelSpreadEffect,NSFontPanelStrikeEffectPressed,NSFontPanelTextColour,NSFontPanelTextColourPressed,NSFontPanelUnderlineEffect,NSFontPanelUnderlineEffectPressed,NSGenericDragCursor,NSGoLeftSmall,NSGoLeftTemplate,NSGoRightSmall,NSGoRightTemplate,NSGrayResizeCorner,NSGreyButton,NSHandCursor,NSHighlightedLinkButton,NSHighlightedMenuArrow,NSHighlightedScrollDownButton,NSHighlightedScrollLeftButton,NSHighlightedScrollRightButton,NSHighlightedScrollUpButton,NSHomeTemplate,NSHSBButton,NSIBeamCursor,NSIChatTheaterTemplate,NSIconViewTemplate,NSInfo,NSInvalidDataFreestandingTemplate,NSLeftFacingTriangleTemplate,NSLeftMenuBarCap,NSLinkButton,NSLinkDragCursor,NSListViewTemplate,NSLockLockedTemplate,NSLockUnlockedTemplate,NSMacPopUpArrows,NSMacPullDownArrow,NSMacSmallPopUpArrows,NSMacSmallPullDownArrow,NSMacSubmenuArrow,NSMacTinyPopUpArrows,NSMacTinyPullDownArrow,NSMagnifyingGlass,NSMediaBrowserIcon,NSMediaBrowserMediaTypeAudio,NSMediaBrowserMediaTypeAudioTemplate32,NSMediaBrowserMediaTypeMovies,NSMediaBrowserMediaTypeMoviesTemplate32,NSMediaBrowserMediaTypePhotos,NSMediaBrowserMediaTypePhotosTemplate32,NSMenuArrow,NSMenuBackTabKeyGlyph,NSMenuCheckmark,NSMenuClearKeyGlyph,NSMenuCommandKeyGlyph,NSMenuControlKeyGlyph,NSMenuDeleteBackwardKeyGlyph,NSMenuDeleteForwardKeyGlyph,NSMenuDownArrowKeyGlyph,NSMenuDownScrollArrow,NSMenuEndKeyGlyph,NSMenuEnterKeyGlyph,NSMenuEscapeKeyGlyph,NSMenuHelpKeyGlyph,NSMenuHomeKeyGlyph,NSMenuISOControlKeyGlyph,NSMenuLeftArrowKeyGlyph,NSMenuMixedState,NSMenuMixedStateTemplate,NSMenuOnStateTemplate,NSMenuOptionKeyGlyph,NSMenuPageDownKeyGlyph,NSMenuPageUpKeyGlyph,NSMenuRadio,NSMenuReturnKeyGlyph,NSMenuRightArrowKeyGlyph,NSMenuShiftKeyGlyph,NSMenuTabKeyGlyph,NSMenuUpArrowKeyGlyph,NSMenuUpScrollArrow,NSMenuWindowDirtyState,NSMiniTextAlignCenter,NSMiniTextAlignJust,NSMiniTextAlignLeft,NSMiniTextAlignRight,NSMiniTextList,NSMobileMe,NSMoveCursor,NSMultipleDocuments,NSNavEjectButton.normal,NSNavEjectButton.normalSelected,NSNavEjectButton.pressed,NSNavEjectButton.rollover,NSNavEjectButton.small.normal,NSNavEjectButton.small.normalSelected,NSNavEjectButton.small.pressed,NSNavEjectButton.small.rollover,NSNavigationBarButtonFillActive,NSNavigationBarButtonFillInactive,NSNavigationBarButtonFillPressedAqua,NSNavigationBarButtonFillPressedGraphite,NSNavigationBarButtonLeftActive,NSNavigationBarButtonLeftInactive,NSNavigationBarButtonLeftPressedAqua,NSNavigationBarButtonLeftPressedGraphite,NSNavigationBarButtonRightActive,NSNavigationBarButtonRightInactive,NSNavigationBarButtonRightPressedAqua,NSNavigationBarButtonRightPressedGraphite,NSNavigationBarLeftAngleActive,NSNavigationBarLeftAngleInactive,NSNavigationBarLeftAnglePressedAqua,NSNavigationBarLeftAnglePressedGraphite,NSNavigationBarRightAngleActive,NSNavigationBarRightAngleInactive,NSNavigationBarRightAnglePressedAqua,NSNavigationBarRightAnglePressedGraphite,NSNetwork,NSPathLocationArrow,NSPathTemplate,NSPauseTemplate,NSPlayTemplate,NSPreferencesGeneral,NSPrivateArrowNextTemplate,NSPrivateArrowPreviousTemplate,NSPrivateChaptersTemplate,NSQuickLookTemplate,NSRadioButtonDisabledMixed,NSRadioButtonDisabledOff,NSRadioButtonDisabledOn,NSRadioButtonEnabledMixed,NSRadioButtonEnabledOff,NSRadioButtonEnabledOn,NSRadioButtonFocusRing,NSRadioButtonHighlightedMixed,NSRadioButtonHighlightedOff,NSRadioButtonHighlightedOn,NSRecordStartTemplate,NSRecordStopTemplate,NSRefreshFreestandingTemplate,NSRefreshTemplate,NSRemoveTemplate,NSResizeLeftCursor,NSResizeLeftRightCursor,NSResizeRightCursor,NSRevealFreestandingTemplate,NSRewindTemplate,NSRGBButton,NSRightFacingTriangleTemplate,NSRightMenuBarCap,NSScriptTemplate,NSScrollDownArrow,NSScrollDownArrowDisabled,NSScrollDownButton,NSScrollLeftArrow,NSScrollLeftArrowDisabled,NSScrollLeftButton,NSScrollRightArrow,NSScrollRightArrowDisabled,NSScrollRightButton,NSScrollUpArrow,NSScrollUpArrowDisabled,NSScrollUpButton,NSSecurity,NSShareTemplate,NSSkipAheadTemplate,NSSkipBackTemplate,NSSliderKnobAbove,NSSliderKnobAboveDisabled,NSSliderKnobAbovePressed,NSSliderKnobBelow,NSSliderKnobBelowDisabled,NSSliderKnobBelowPressed,NSSliderKnobHorizontal,NSSliderKnobHorizontalDisabled,NSSliderKnobHorizontalPressed,NSSliderKnobLeft,NSSliderKnobLeftDisabled,NSSliderKnobLeftPressed,NSSliderKnobRight,NSSliderKnobRightDisabled,NSSliderKnobRightPressed,NSSliderKnobVertical,NSSliderKnobVerticalDisabled,NSSliderKnobVerticalPressed,NSSlideshowTemplate,NSSmallMagnifyingGlass,NSSmallSCurveFill_Active_Textured,NSSmallSCurveFill_Disabled_Textured,NSSmallSCurveFill_Pressed_Textured,NSSmallSCurveLeftCap_Active_Textured,NSSmallSCurveLeftCap_Disabled_Textured,NSSmallSCurveLeftCap_Pressed_Textured,NSSmallSCurveRightCap_Active_Textured,NSSmallSCurveRightCap_Disabled_Textured,NSSmallSCurveRightCap_Pressed_Textured,NSSmartBadgeTemplate,NSStatusAvailable,NSStatusAvailableFlat,NSStatusAway,NSStatusIdle,NSStatusNone,NSStatusNoneFlat,NSStatusOffline,NSStatusPartiallyAvailable,NSStatusPartiallyAvailableFlat,NSStatusUnavailable,NSStatusUnavailableFlat,NSStatusUnknown,NSStopProgressFreestandingTemplate,NSStopProgressTemplate,NSSwitchDisabledMixed,NSSwitchDisabledOff,NSSwitchDisabledOn,NSSwitchEnabledMixed,NSSwitchEnabledOff,NSSwitchEnabledOn,NSSwitchFocusRing,NSSwitchHighlightedMixed,NSSwitchHighlightedOff,NSSwitchHighlightedOn,NSSynchronize,NSTableViewDropBetweenCircleMarker,NSTextRulerAlignCentered,NSTextRulerAlignJustified,NSTextRulerAlignLeft,NSTextRulerAlignRight,NSTextRulerCenterTab,NSTextRulerDecimalTab,NSTextRulerFirstLineIndent,NSTextRulerIndent,NSTextRulerIndentFirst,NSTextRulerIndentLeft,NSTextRulerIndentRight,NSTextRulerLeftTab,NSTextRulerLineHeightDecrease,NSTextRulerLineHeightFixed,NSTextRulerLineHeightFlexible,NSTextRulerLineHeightIncrease,NSTextRulerMarginLeft,NSTextRulerMarginRight,NSTextRulerRightTab,NSTextRulerTabCenter,NSTextRulerTabDecimal,NSTextRulerTabLeft,NSTextRulerTabRight,NSThemeWindowDocument,NSTitlebarEnterFullScreenTemplate,NSTitlebarExitFullScreenTemplate,NSTokenPopDownArrow,NSToolbarBookmarks,NSToolbarClipIndicator,NSToolbarCustomizeToolbarItemImage,NSToolbarFlexibleSpaceItemPaletteRep,NSToolbarMoreTemplate,NSToolbarPrintItemImage,NSToolbarShowColorsItemImage,NSToolbarShowFontsItemImage,NSToolbarSpaceItemPaletteRep,NSTouchBarAddDetailTemplate,NSTouchBarAddTemplate,NSTouchBarAlarmTemplate,NSTouchBarAudioInputMuteTemplate,NSTouchBarAudioInputTemplate,NSTouchBarAudioOutputMuteTemplate,NSTouchBarAudioOutputVolumeHighTemplate,NSTouchBarAudioOutputVolumeLowTemplate,NSTouchBarAudioOutputVolumeMediumTemplate,NSTouchBarAudioOutputVolumeOffTemplate,NSTouchBarBookmarksTemplate,NSTouchBarColorPickerFill,NSTouchBarColorPickerFont,NSTouchBarColorPickerStroke,NSTouchBarCommunicationAudioTemplate,NSTouchBarCommunicationVideoTemplate,NSTouchBarComposeTemplate,NSTouchBarDeleteTemplate,NSTouchBarDownloadTemplate,NSTouchBarEnterFullScreenTemplate,NSTouchBarExitFullScreenTemplate,NSTouchBarFastForwardTemplate,NSTouchBarFolderCopyToTemplate,NSTouchBarFolderMoveToTemplate,NSTouchBarFolderTemplate,NSTouchBarGetInfoTemplate,NSTouchBarGoBackTemplate,NSTouchBarGoDownTemplate,NSTouchBarGoForwardTemplate,NSTouchBarGoUpTemplate,NSTouchBarHistoryTemplate,NSTouchBarIconViewTemplate,NSTouchBarListViewTemplate,NSTouchBarMailTemplate,NSTouchBarNewFolderTemplate,NSTouchBarNewMessageTemplate,NSTouchBarOpenInBrowserTemplate,NSTouchBarPauseTemplate,NSTouchBarPlayPauseTemplate,NSTouchBarPlayTemplate,NSTouchBarQuickLookTemplate,NSTouchBarRecordStartTemplate,NSTouchBarRecordStopTemplate,NSTouchBarRefreshTemplate,NSTouchBarRewindTemplate,NSTouchBarRotateLeftTemplate,NSTouchBarRotateRightTemplate,NSTouchBarSearchTemplate,NSTouchBarShareTemplate,NSTouchBarSidebarTemplate,NSTouchBarSkipAhead15SecondsTemplate,NSTouchBarSkipAhead30SecondsTemplate,NSTouchBarSkipAheadTemplate,NSTouchBarSkipBack15SecondsTemplate,NSTouchBarSkipBack30SecondsTemplate,NSTouchBarSkipBackTemplate,NSTouchBarSkipToEndTemplate,NSTouchBarSkipToStartTemplate,NSTouchBarSlideshowTemplate,NSTouchBarTagIconTemplate,NSTouchBarTextBoldTemplate,NSTouchBarTextBoxTemplate,NSTouchBarTextCenterAlignTemplate,NSTouchBarTextItalicTemplate,NSTouchBarTextJustifiedAlignTemplate,NSTouchBarTextLeftAlignTemplate,NSTouchBarTextListTemplate,NSTouchBarTextRightAlignTemplate,NSTouchBarTextStrikethroughTemplate,NSTouchBarTextUnderlineTemplate,NSTouchBarUserAddTemplate,NSTouchBarUserGroupTemplate,NSTouchBarUserTemplate,NSTouchBarVolumeDownTemplate,NSTouchBarVolumeUpTemplate,NSTrashEmpty,NSTrashFull,NSTriangleNormalDown,NSTriangleNormalRight,NSTrianglePressedDown,NSTrianglePressedRDown,NSTrianglePressedRight,NSTriangleWhite-Collapsed,NSTriangleWhite-Expanded,NSTriangleWhite-Pressed-Collapsed,NSTriangleWhite-Pressed-Expanded,NSTriangleWhite-Turning,NSTruthBottomLeftResizeCursor,NSTruthBottomRightResizeCursor,NSTruthClose,NSTruthCloseH,NSTruthCollapse,NSTruthCollapseH,NSTruthEditedClose,NSTruthEditedCloseH,NSTruthHorizontalResizeCursor,NSTruthHorizontalResizeCursor,NSTruthHResizeCursor,NSTruthHResizeCursor,NSTruthMiniDocument,NSTruthMiniDocumentEdited,NSTruthTopLeftResizeCursor,NSTruthTopRightResizeCursor,NSTruthVerticalResizeCursor,NSTruthVerticalResizeCursor,NSTruthVResizeCursor,NSTruthVResizeCursor,NSTruthZoom,NSTruthZoomH,NSUser,NSUserAccounts,NSUserGroup,NSUserGuest,NSUtilityClose,NSUtilityCloseH,NSUtilityCollapse,NSUtilityCollapseH,NSUtilityEditedClose,NSUtilityEditedCloseH,NSUtilityZoom,NSUtilityZoomH,NSWaitCursor,NSWin95BrowserBranch,NSWin95ComboBoxDownArrow,NSWin95HighlightedBrowserBranch,NSWin95PopUpArrows,NSWin95PullDownArrow,NSWindowClose,NSWindowCloseH,NSWindowCollapse,NSWindowCollapseH,NSWindowEditedClose,NSWindowEditedCloseH,NSWindowMiniDocument,NSWindowMiniDocumentEdited,NSWindowZoom,NSWindowZoomH,NSWinHighRadio,NSWinHighSwitch,NSWinRadio,NSWinSliderKnobAbove,NSWinSliderKnobAbovePressed,NSWinSliderKnobBelow,NSWinSliderKnobBelowPressed,NSWinSliderKnobHorizontal,NSWinSliderKnobHorizontalPressed,NSWinSliderKnobLeft,NSWinSliderKnobLeftPressed,NSWinSliderKnobRight,NSWinSliderKnobRightPressed,NSWinSliderKnobVertical,NSWinSliderKnobVerticalPressed,NSWinSwitch,NXAppTile,NXauto,NXBreak,NXBreakAll,NXcircle16,NXcircle16H,NXclose,NXcloseH,NXdefaultappicon,NXdefaulticon,NXdivider,NXdividerH,NXediting,NXfirstindent,NXFollow,NXGrey0,NXGrey1,NXGrey2,NXGrey3,NXGrey4,NXGrey5,NXGrey6,NXHDestLinkChain,NXHelpBacktrack,NXHelpFind,NXHelpIndex,NXHelpMarker,NXHelpMarkerH,NXhSliderKnob,NXHSrcLinkChain,NXiconify,NXiconifyH,NXleftindent,NXleftmargin,NXMagnifier,NXmanual,NXminiWindow,NXminiWorld,NXpopup,NXpopupH,NXpulldown,NXpulldownH,NXresize,NXresizeH,NXresizeKnob,NXresizeKnobH,NXrightindent,NXrightmargin,NXscrollKnob,NXscrollMenuDown,NXscrollMenuDownD,NXscrollMenuDownH,NXscrollMenuLeft,NXscrollMenuLeftD,NXscrollMenuLeftH,NXscrollMenuRight,NXscrollMenuRightD,NXscrollMenuRightH,NXscrollMenuUp,NXscrollMenuUpD,NXscrollMenuUpH,NXsquare16,NXsquare16H,NXtab,NXUpdate,NXVDestLinkChain,NXvSliderKnob,NXVSrcLinkChain,NXwait"
-
-constant kNSColorSystemColorNames is "systemBlueColor,systemGreenColor,systemRedColor,systemYellowColor,systemOrangeColor,systemPurpleColor,systemPinkColor,systemTealColor,systemIndigoColor,systemGrayColor,systemGray2Color,systemGray3Color,systemGray4Color,systemGray5Color,systemGray6Color"
 
 ----      CoreImage Filter Categories
 constant kCICategoryBuiltIn is "CICategoryBuiltIn"
@@ -127,11 +124,12 @@ private foreign handler c_NSStringFromRect(in pCGRect as CGRect) returns ObjcId 
 -- c_NSRectFromString is super handy, it parses an NSstring for four numbers in order orig x, orig y, width, height:
 private foreign handler c_NSRectFromString(in pNSString as ObjcId) returns NSRect binds to "c:NSRectFromString" -- might return pointer to CGRect
 private foreign handler objC_NSRectFromString(in pNSString as ObjcId) returns CGRect binds to "objc:NSRect.+NSRectFromString:"
-private foreign handler c_NSSizeFromString(in pNSString as ObjcId) returns optional NSSize binds to "c:NSSizeFromString"
 
+private foreign handler c_NSSizeFromString(in pNSString as ObjcId) returns optional NSSize binds to "c:NSSizeFromString"
 private foreign handler ObjC_NSImageGetSize(in pObj as ObjcId, in pNSSize as NSSize) returns NSSize binds to "objc:NSImage.size"
 private foreign handler ObjC_NSImageSetSize(in pObj as ObjcId, in pNSSize as NSSize) returns nothing binds to "objc:NSImage.-setSize:"
 private foreign handler ObjC_NSImageSetScale(in pObj as ObjcId, in pScale as CUInt) returns nothing binds to "objc:NSImage.-setScale:"
+
 
 -- + (instancetype)imageRepWithData:(NSData *)data;
 -- https://developer.apple.com/documentation/appkit/nsbitmapimagerep/1395502-imagerepwithdata?language=objc
@@ -141,183 +139,13 @@ private foreign handler ObjC_NSWorkspaceSharedWorkspace() returns ObjcId binds t
 private foreign handler ObjC_NSWorkspaceSelectFile(in pSharedWorkspace as ObjcId, in pFilename as ObjcId, in pRootedAtPath as ObjcId) returns CBool binds to "objc:NSWorkspace.-selectFile:inFileViewerRootedAtPath:"
 private foreign handler ObjC_NSWorkspaceIsFilePackageAtPath(in pSharedWorkspace as ObjcId, in pFilename as ObjcId) returns CBool binds to "objc:NSWorkspace.-isFilePackageAtPath:"
 private foreign handler ObjC_NSWorkspaceRunningApplications(in pSharedWorkspace as ObjcId) returns ObjcId binds to "objc:NSWorkspace.-runningApplications"
-private foreign handler ObjC_NSWorkspaceLaunchApplication(in pSharedWorkspace as ObjcId, in pApf as ObjcId) returns CBool binds to "objc:NSWorkspace.launchApplication:"
+private foreign handler ObjC_NSWorkspaceLaunchApplication(in pSharedWorkspace as ObjcId, in pAppName as ObjcId) returns CBool binds to "objc:NSWorkspace.launchApplication:"
 private foreign handler ObjC_NSWorkspaceFrontmostApplication(in pSharedWorkspace as ObjcId) returns ObjcId binds to "objc:NSWorkspace.-frontmostApplication"
 private foreign handler ObjC_NSWorkspaceURLForAppBundleID(in pSharedWorkspace as ObjcId, in pBundleID as ObjcId ) returns ObjcId binds to "objc:NSWorkspace.-URLForApplicationWithBundleIdentifier:"
 
 private foreign handler ObjC_NSWorkspaceIconForFile(in pSharedWorkspace as ObjcId, in pFilename as ObjcId) returns optional ObjcId binds to "objc:NSWorkspace.-iconForFile:"
 private foreign handler ObjC_NSWorkspaceIconForContentType(in pSharedWorkspace as ObjcId, in pUTType as ObjcId) returns optional ObjcId binds to "objc:NSWorkspace.-iconForContentType:"
 private foreign handler ObjC_NSWorkspaceSetIconForFile(in pSharedWorkspace as ObjcId, in tNSImage as optional ObjcId, in pFilename as ObjcId, in pOption as CUInt ) returns CBool binds to "objc:NSWorkspace.-setIcon:forFile:options:"
-
-private foreign handler ObjC_NSColorColorNamed( in pName as ObjcId ) returns ObjcId binds to "objc:NSColor.+named:"
-private foreign handler ObjC_NSColorColorWithKey( in pNSColorName as ObjcId ) returns ObjcId binds to "objc:NSColor.-colorWithKey:"
-private foreign handler ObjC_NSColorControlAccentColor() returns ObjcId binds to "objc:NSColor.controlAccentColor"
-
-private foreign handler ObjC_NSColorListAvailableColorLists() returns ObjcId binds to "objc:NSColorList.+availableColorLists"
-private foreign handler ObjC_NSColorListName(in pNSColorList as ObjcId) returns ObjcId binds to "objc:NSColorList.name"
-private foreign handler ObjC_NSColorListColorListNamed(in pNSColorLists as ObjcId) returns optional ObjcId binds to "objc:NSColorList.+colorListNamed:"
-private foreign handler ObjC_NSColorListColorListAllKeys(in pNSColorList as ObjcId) returns optional ObjcId binds to "objc:NSColorList.allKeys"
-private foreign handler ObjC_NSColorListColorWithKey(in pNSColorList as ObjcId, in pNSColorName as ObjcId) returns optional ObjcId binds to "objc:NSColorList.-colorWithKey:"
--- It takes an NSString parameter named pName and returns an NSColor object.
-private foreign handler ObjC_NSColorRedComponent(in pColor as ObjcId) returns CDouble binds to "objc:NSColor.-redComponent"
-private foreign handler ObjC_NSColorGreenComponent(in pColor as ObjcId) returns CDouble binds to "objc:NSColor.-greenComponent"
-private foreign handler ObjC_NSColorBlueComponent(in pColor as ObjcId) returns CDouble binds to "objc:NSColor.-blueComponent"
-private foreign handler ObjC_NSColorAlphaComponent(in pColor as ObjcId) returns CDouble binds to "objc:NSColor.-alphaComponent"
--- These binding strings correspond to methods in the NSColor class that return the individual components (red, green, blue, and alpha) of a color.
--- Each method takes an NSColor object (pColor) as input and returns a CDouble value representing the respective component.
-private foreign handler ObjC_NSColorNumberOfComponents(in pColor as ObjcId) returns CUInt binds to "objc:NSColor.numberOfComponents"
-
-private foreign handler ObjC_NSColorColorSpace(in pNSColor as ObjcId) returns ObjcId binds to "objc:NSColor.-colorSpace"
-private foreign handler ObjC_NSColorSpaceAlloc() returns ObjcRetainedId binds to "objc:NSColorSpace.+alloc"
-private foreign handler c_CGColorSpaceCreateDeviceRGB() returns optional Pointer binds to "c:CGColorSpaceCreateDeviceRGB"
-private foreign handler ObjC_NSColorSpaceInitWithCGColorSpace(in pObj as ObjcRetainedId, in CGColorSpaceRef as optional Pointer) returns ObjcId binds to "objc:NSColorSpace.-initWithCGColorSpace:"
-
-private foreign handler ObjC_NSColorUsingColorSpace (in pNSColor as ObjcId, in pNSColorSpace as ObjcId) returns ObjcId binds to "objc:NSColor.-colorUsingColorSpace:"
-
-private foreign handler ObjC_NSColorFromRGB(in pRed as CDouble, in pGreen as CDouble, in pBlue as CDouble) returns ObjcId binds to "objc:NSColor.+colorWithRed:green:blue:alpha:"
-private foreign handler ObjC_NSColorFromRGBA(in pRed as CDouble, in pGreen as CDouble, in pBlue as CDouble, in pAlpha as CDouble) returns ObjcId binds to "objc:NSColor.+colorWithRed:green:blue:alpha:"
-private foreign handler ObjC_NSColorFromWhite(in pWhite as CDouble, in pAlpha as CDouble) returns ObjcId binds to "objc:NSColor.+colorWithWhite:alpha:"
-private foreign handler ObjC_NSColorFromCMYK(in pCyan as CDouble, in pMagenta as CDouble, in pYellow as CDouble, in pBlack as CDouble, in pAlpha as CDouble) returns ObjcId binds to "objc:NSColor.+colorWithDeviceCyan:magenta:yellow:black:alpha:"
-private foreign handler ObjC_NSColorFromHSB(in pHue as CDouble, in pSaturation as CDouble, in pBrightness as CDouble, in pAlpha as CDouble) returns ObjcId binds to "objc:NSColor.+colorWithHue:saturation:brightness:alpha:"
-
-private foreign handler ObjC_NSColorGetRGBA(in pNSColor as ObjcId, out rRed as optional CDouble, out rGreen as optional CDouble, out rBlue as optional CDouble, out rAlpha as optional CDouble ) returns nothing binds to "objc:NSColor.getRed:green:blue:alpha:"
-private foreign handler ObjC_NSColorGetCMYK(in pColor as ObjcId) returns Array binds to "objc:NSColor.getCyan:magenta:yellow:black:alpha:"
-private foreign handler ObjC_NSColorGetHueSaturationBrightness(in pColor as ObjcId) returns Array binds to "objc:NSColor.getHue:saturation:brightness:alpha:"
--- These binding strings correspond to methods for creating NSColor objects from various color space representations (RGB, white, CMYK, HSB)
--- and for converting NSColor objects to different color space representations.
-
-public handler getNSColorListAvalableLists() returns optional any
-   variable tAvailableColorLists as optional ObjcId
-   variable tColorLists as optional List
-   variable tNSColorList as optional ObjcId
-   variable tNSStrObj as optional ObjcId
-   variable tString as optional String
-   variable tReturnString as optional String
-   put "" into tReturnString
-   unsafe
-    -- if pSystemColorName is not "" then
-      -- put ObjC_NSColorColorNamed(StringToNSString(pSystemColorName)) into tNSColor
-      -- put ObjC_NSColorColorWithKey(StringToNSString(pSystemColorName)) into tNSColor
-      put ObjC_NSColorListAvailableColorLists() into tAvailableColorLists
-      if tAvailableColorLists is not nothing then
-         put ListFromNSArray(tAvailableColorLists) into tColorLists
-         log [tColorLists]
-         repeat for each element tNSColorList in tColorLists
-            put ObjC_NSColorListName( tNSColorList) into tNSStrObj
-            put StringFromNSString(tNSStrObj) into tString
-            log [tString]
-            put tString & "\n" after tReturnString
-         end repeat
-         delete char -1 of tReturnString
-      end if
-   end unsafe
-   return tReturnString
-end handler
-
-public handler getNSColorListNamed(in pColorListName as optional String) returns optional any
-   variable tNSColorList as optional ObjcId
-   variable tNSColor as optional ObjcId
-   variable tNSArray as optional ObjcId
-   variable tColorKeysList as optional List
-   variable tString as optional String
-   variable tReturnString as String
-   variable tColorName as String
-   put "" into tReturnString
-   unsafe
-    -- if pColorListName is not "" then
-      put ObjC_NSColorListColorListNamed(StringToNSString(pColorListName)) into tNSColorList
-      if tNSColorList is not nothing then
-         -- LogNSObjectReflection(tNSColorList)
-         put ObjC_NSColorListColorListAllKeys(tNSColorList) into tNSArray
-         put ListFromNSArray( tNSArray ) into tColorKeysList
-         sort tColorKeysList in ascending text order
-         repeat for each element tString in tColorKeysList
-            put tString & "\n" after tReturnString
-         end repeat
-         delete char -1 of tReturnString
-
-         put element 1 of tColorKeysList into tColorName
-         put ObjC_NSColorListColorWithKey(tNSColorList, StringToNSString(tColorName)) into tNSColor
-         LogNSObjectReflection(tNSColor)
-      end if
-   end unsafe
-   return tReturnString
-end handler
-
-public handler getNSColorGetSystemColorRGB(in pColorcNameStr as String) returns optional any
-   variable tNSColorList as optional ObjcId
-   variable tNSColor as optional ObjcId
-   variable tNSColorSpace as optional ObjcId
-   variable tCGColorSpaceRef as optional Pointer
-   variable tColorKeysList as optional List
-   variable tColorName as String
-   variable rRed as optional Number
-   variable rBlue as optional Number
-   variable rGreen as optional Number
-   variable rAlpha as optional Number
-
-   variable tInteger as optional Integer
-   variable tString as optional String
-   variable tReturnString as String
-   variable tAny as optional any
-
-   put pColorcNameStr into tReturnString
-   unsafe
-    -- if pColorListName is not "" then
-      put ObjC_NSColorListColorListNamed(StringToNSString("System")) into tNSColorList
-      if tNSColorList is not nothing then
-         -- LogNSObjectReflection(tNSColorList)
-         put ObjC_NSColorListColorWithKey(tNSColorList, StringToNSString(pColorcNameStr)) into tNSColor
-         --  LogNSObjectReflection(tNSColor)
-
-          put c_CGColorSpaceCreateDeviceRGB() into tCGColorSpaceRef
-          log tCGColorSpaceRef
-          put ObjC_NSColorSpaceAlloc() into tNSColorSpace
-          put ObjC_NSColorSpaceInitWithCGColorSpace(tNSColorSpace,tCGColorSpaceRef) into tNSColorSpace
-           -- put ObjC_NSColorSpaceGenericRGB(tNSColorSpace) into tNSColorSpace
-          LogNSObjectReflection(tNSColorSpace)
-          put ObjC_NSColorUsingColorSpace(tNSColor,tNSColorSpace) into tNSColor
-          LogNSObjectReflection(tNSColor)
-          put ObjC_NSColorNumberOfComponents(tNSColor) into tInteger
-          log ["Number of Color Components",tInteger]
-          ObjC_NSColorGetRGBA(tNSColor,rRed,rGreen,rBlue,rAlpha)
-          put rRed * 255 into rRed
-          put rGreen * 255 into rGreen
-          put rBlue * 255 into rBlue
-          put rAlpha * 255 into rAlpha
-          if rAlpha = 255 then -- opecity is 100%
-             return rRed formatted as string &","& rGreen formatted as string &","&  rBlue formatted as string
-          else
-             return rRed formatted as string &","& rGreen formatted as string &","&  rBlue formatted as string &","&  rAlpha formatted as string
-          end if
-      else
-         return "Error: Color Name Not Found"
-      end if
-   end unsafe
-
-   return tReturnString
-end handler
-
-public handler getNSColorSystemColorNames()
-   variable rRetStr as optional String
-   put kNSColorSystemColorNames into rRetStr
-   replace "," with "\n" in rRetStr
-   return rRetStr
-end handler
-
-public handler getNSColorSystemColor(in pSystemColorName as optional String) returns optional any
-   variable tNSColor as optional ObjcId
-   unsafe
-    -- if pSystemColorName is not "" then
-      -- put ObjC_NSColorColorNamed(StringToNSString(pSystemColorName)) into tNSColor
-      -- put ObjC_NSColorColorWithKey(StringToNSString(pSystemColorName)) into tNSColor
-      put ObjC_NSColorListAvailableColorLists() into tNSColor
-      log [tNSColor]
-      -- LogNSObjectReflection(tNSColor)
-   -- end if
-
-   end unsafe
-end handler
 
 public handler getNSImageNames()
    variable rRetStr as optional String
